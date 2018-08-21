@@ -2,10 +2,15 @@
 #include <iostream>
 using namespace std;
 
-Fecha::Fecha(int dd, int mm, int aaaa) {
-   mes = mm;
-   dia = dd;
-   anio = aaaa;
+Fecha::Fecha(int dd, int mm, int aaaa) : dia(dd), mes(mm), anio(aaaa) {
+	if((dia < 1) || (dia > 31)){
+      cout << "Valor ilegal para el dia!\n";
+      exit(1);
+	}
+	if((anio < 0) || (anio > 2018)){
+      cout << "Valor ilegal para el año!\n";
+      exit(1);
+	}
 }
 
 void Fecha::inicializaFecha(int dd, int mm, int aaaa) {
