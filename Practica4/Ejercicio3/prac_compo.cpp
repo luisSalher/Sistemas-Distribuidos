@@ -13,7 +13,8 @@ int main( ){
 
     alto = rectangulo1.obtieneSupIzq().obtenerY() - rectangulo1.obtieneInfDer().obtenerY();
     ancho = rectangulo1.obtieneInfDer().obtenerX() - rectangulo1.obtieneSupIzq().obtenerX();
-    cout << "El área del rectángulo es = " << ancho*alto << endl;
+    //cout << "El área del rectángulo es = " << ancho*alto << endl;
+    cout << "El area del rectangulo es = " << rectangulo1.obtenerArea() << endl;
     return 0;
 }
 

@@ -7,10 +7,12 @@ private:
     Coordenada inferiorDer;
 public:
 	Rectangulo();
-    Rectangulo(double xSupIzq, double ySupIzq, double xInfDer, double yInfDer);
+    //Rectangulo(double xSupIzq, double ySupIzq, double xInfDer, double yInfDer);
+    Rectangulo(Coordenada , Coordenada);
     void imprimeEsq();
     Coordenada obtieneSupIzq();
     Coordenada obtieneInfDer();
+    double obtenerArea();
 };
 
 #endif
