@@ -41,5 +41,46 @@ bool Fecha::leapyr()
 	else{
 		return false;
 	}
-
 }
+
+int Fecha::masViejaP(Fecha fecha1, Fecha fecha2){
+	int f1 = 0;
+	int f2 = 0;
+
+	f1 = fecha1.convierte();
+	f2 = fecha2.convierte();
+
+	if(f1 > f2){
+		return 1;
+	}
+	else if(f1 == f2){
+		return 0;
+	}
+	else{
+		return -1;
+	}
+}
+
+int Fecha::masViejaR(Fecha &fecha1, Fecha& fecha2){
+	int f1 = 0;
+	int f2 = 0;
+
+	f1 = fecha1.convierte();
+	f2 = fecha2.convierte();
+
+	if(f1 > f2){
+		return 1;
+	}
+	else if(f1 == f2){
+		return 0;
+	}
+	else{
+		return -1;
+	}
+}
+
+
+
+
+
+

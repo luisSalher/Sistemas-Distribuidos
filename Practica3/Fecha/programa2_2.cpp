@@ -6,7 +6,12 @@ int
 main()
 {
 
-	Fecha a(21, 9, 2030);
+	int res = 0;
+	Fecha a(21, 9, 2010);
+	Fecha b(21, 9, 2011);
 	a.muestraFecha();
+	b.muestraFecha();
 
+	res = masViejaP(a, b);
+	cout << "Resultado de metodo: " << res << "\n";
 }
