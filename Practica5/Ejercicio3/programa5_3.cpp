@@ -2,23 +2,37 @@
 #include "PoligonoIrreg.h"
 #include <iostream>
 
+#define MAXVERT 30
+#define MAXCOORD 10
+#define NPOLIGONOS 5
+
 using namespace std;
 
 int main(){
     
-    vector<PoligonoIrreg> poligonos;
-    
+    int i = 0;
+    int j = 0;
+    int vertices = 0;
+    int coordenadaX = 0;
+    int coordenadaY = 0;
 
-    /*PoligonoIrreg poligono;
+    vector<PoligonoIrreg> poligonos(NPOLIGONOS);
+    //PoligonoIrreg poligonos;
     
-    poligono.anadeVertice(Coordenada(1,2));
-    poligono.imprimeVertices();
-    
-    poligono.anadeVertice(Coordenada(5,6));
-    poligono.imprimeVertices();
+    vertices = rand() % MAXVERT;
+    cout << "\n Numero de vertices: " << vertices <<"\n";
 
-    poligono.anadeVertice(Coordenada(8,12));
-    poligono.imprimeVertices();*/
+    for(i=0; i<poligonos.size(); i++){
+    	PoligonoIrreg poligonoTemp;
+    	.push_back(poligonoTemp);
+    	for(j=0; j<vertices; j++){
+    		coordenadaX = rand() % MAXCOORD;
+    		coordenadaY = rand() % MAXCOORD;
+    		poligonos[i].anadeVertice(Coordenada(coordenadaX, coordenadaY));
+    	}
+    }
+
+    //poligonos.imprimeVertices();
     
     return 0;
 }
