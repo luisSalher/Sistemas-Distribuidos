@@ -5,7 +5,7 @@
 using namespace std;
 
 /*
- * Uso del método push_back para agregar elementos al vector de Poligonos irregulares
+ * Uso del método reserve para agregar elementos al vector de Poligonos irregulares
  * Prueba con 30 poligonos con un número aleatorio entre 0 y 10 de vértices con coordenadas aleatorias entre 0 y 10
  */
 
@@ -23,8 +23,7 @@ int main(){
         //cout << "\n Primer for: i=" << i <<"\n";
         vertices = rand() % MAXVERT;
         //cout << "\n Numero de vertices: " << vertices <<"\n";
-    	PoligonoIrreg poligonoTemp;
-    	poligonos.push_back(poligonoTemp);
+        poligonos.reserve(NPOLIGONOS);
     	for(j=0; j<vertices; j++){
             //cout << "\n\t Segundo for: j=" << j <<"\n";
     		coordenadaX = rand() % MAXCOORD;

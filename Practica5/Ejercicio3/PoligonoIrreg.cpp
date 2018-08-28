@@ -1,10 +1,10 @@
 #include "Coordenada.h"
 #include "PoligonoIrreg.h"
 #include <iostream>
+
 using namespace std;
 
 PoligonoIrreg::PoligonoIrreg(){}
-
 
 void PoligonoIrreg::anadeVertice(Coordenada c) {
     vertices.push_back(c);
