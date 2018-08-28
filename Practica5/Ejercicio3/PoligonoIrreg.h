@@ -2,9 +2,9 @@
 #define POLIGONOIRREG_H_
 #include <vector>
 
-#define MAXVERT 10
-#define MAXCOORD 10
-#define NPOLIGONOS 1000
+#define MAXVERT 50
+#define MAXCOORD 20
+#define NPOLIGONOS 1000000
 
 using namespace std;
 class PoligonoIrreg{
@@ -13,8 +13,8 @@ class PoligonoIrreg{
 		static int verticesTotales;
 	public:
 		PoligonoIrreg();
-
-	void anadeVertice(Coordenada);
-	void imprimeVertices();
+		static int getVerticesTotales();
+		void anadeVertice(Coordenada);
+		void imprimeVertices();
 };
 #endif

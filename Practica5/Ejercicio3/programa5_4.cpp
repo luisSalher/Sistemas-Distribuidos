@@ -23,15 +23,22 @@ int main(){
         //cout << "\n Primer for: i=" << i <<"\n";
         vertices = rand() % MAXVERT;
         //cout << "\n Numero de vertices: " << vertices <<"\n";
+        PoligonoIrreg poligonoTemp;
         poligonos.reserve(NPOLIGONOS);
     	for(j=0; j<vertices; j++){
             //cout << "\n\t Segundo for: j=" << j <<"\n";
     		coordenadaX = rand() % MAXCOORD;
     		coordenadaY = rand() % MAXCOORD;
-    		poligonos[i].anadeVertice(Coordenada(coordenadaX, coordenadaY));
+    		//poligonos[i].anadeVertice(Coordenada(coordenadaX, coordenadaY));
+            poligonoTemp.anadeVertice(Coordenada(coordenadaX, coordenadaY));
     	}
+        poligonos[i] = poligonoTemp;
         //poligonos[i].imprimeVertices();
     }
+
+    cout << "\n Se usaron en total: " << poligonos[0].getVerticesTotales() << "\n";
     
     return 0;
 }
+
+

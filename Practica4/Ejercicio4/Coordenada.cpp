@@ -1,5 +1,4 @@
 #include "Coordenada.h"
-#include "Rectangulo.h"
 #include <iostream>
 using namespace std;
 
