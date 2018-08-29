@@ -10,8 +10,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]){
+	int times = 0;
 	string big_string;
-
+	size_t pos = 0;
 	srand (time(NULL));
 
 	for (int x = 0; x < atoi(argv[1]); x++)
@@ -31,9 +32,12 @@ int main(int argc, char* argv[]){
 		big_string.append(tls);
 	}
 
-	int indice = big_string.find("IPN",0);
-
-	if(indice>0) {
-		cout << "'IPN' encontrado" << endl;
-	}
+    while ((pos = big_string.find("IPN", pos)) != string::npos){
+        times++;
+        pos += 4;
+    }
+    
+	cout <<" IPN encontrados= " << times << endl;
 }
+
+

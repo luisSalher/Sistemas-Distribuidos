@@ -12,8 +12,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 	char *big_string = NULL;
-	int bytes_copied = 0, m = 0;
-
+	int bytes_copied = 0, m = 0, times = 0;
 	srand (time(NULL));
 
 	for (int x = 1; x <= atoi(argv[1]); x++)
@@ -29,7 +28,7 @@ int main(int argc, char* argv[]){
 				tls[z] = c;
 			}
 		}
-		tls[4] = '\0';
+		//tls[4] = '\0';
 
 		m = (sizeof(tls))*x;
 		big_string = (char*)realloc(big_string, m);
@@ -37,7 +36,11 @@ int main(int argc, char* argv[]){
 		bytes_copied += sizeof(tls);
 	}
 
-	if(strstr(big_string, "IPN") != NULL) {
-		printf("'IPN' encontrado\n");
-	}
+	while ((big_string = strstr(big_string, "IPN")) != NULL){
+        times++;
+        big_string += 4;
+    }
+
+    cout <<" IPN encontrados= " << times << endl;
 }
+
