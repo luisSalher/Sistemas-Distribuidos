@@ -1,6 +1,6 @@
 public class rendJava {
     public static void main(String[] args){
-    int Max=3400000;
+    int Max=20000000;
     double i=0;
     double seno=0,coseno=0,tangente=0,logaritmo=0,raizCuad=0;
     while(i<Max){

@@ -36,9 +36,9 @@ int main(int argc, char* argv[]){
 	}
     int i=0;
 	while (big_string[i] != '\0'){
-        if(big_string[i]=='I'){
-            if(big_string[i+1]=='P'){
-                if(big_string[i+2]=='N')
+        if(big_string[i] =='I'){
+            if(big_string[i+1] =='P'){
+                if(big_string[i+2] =='N')
                     times++;
             }
         }

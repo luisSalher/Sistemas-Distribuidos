@@ -13,6 +13,7 @@ using namespace std;
 int main(int argc, char* argv[]){
 	char *big_string = NULL;
 	int bytes_copied = 0, m = 0, times = 0;
+	char c;
 	//srand (time(NULL));
 
 	for (int x = 1; x <= atoi(argv[1]); x++)
@@ -36,10 +37,27 @@ int main(int argc, char* argv[]){
 		bytes_copied += sizeof(tls);
 	}
 
-	while ((big_string = strstr(big_string, "IPN")) != NULL){
+	/*while ((big_string = strstr(big_string, "IPN")) != NULL){
         times++;
         big_string += 4;
+    }*/
+
+    int i = 0;
+    //printf("Size: %d\n", i);
+
+    while(big_string[i] != '\0'){
+    	if(big_string[i] == 'I'){
+    		if(big_string[i+1] == 'P'){
+    			if(big_string[i+2] == 'N'){
+    				times++;
+    			}
+    		}
+    	}
+    	else{
+    		i += 4;
+    	}
     }
+    
 
     cout <<" IPN encontrados= " << times << endl;
 }
