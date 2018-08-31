@@ -7,7 +7,6 @@ class BigString {
         char[] letras = new char[4];
         letras[3] = ' ';
         int rango = (90 - 65) + 1;
-        long startTime = System.nanoTime();
 
         for (long i = 0; i < numero ; i++) {
             letras[0] = (char)((Math.random()*rango) + 65);
