@@ -41,9 +41,8 @@ int main(int argc, char* argv[]){
         times++;
         big_string += 4;
     }*/
-
+        /*
     int i = 0;
-    //printf("Size: %d\n", i);
 
     while(big_string[i] != '\0'){
     	if(big_string[i] == 'I'){
@@ -56,9 +55,8 @@ int main(int argc, char* argv[]){
     	else{
     		i += 4;
     	}
-    }
+    }*/
     
-
     cout <<" IPN encontrados= " << times << endl;
 }
 
