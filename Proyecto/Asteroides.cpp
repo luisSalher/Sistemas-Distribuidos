@@ -107,7 +107,7 @@ int main()
         coorX=rand()%801;
         coorY=600;
     }
-      a[cont].crear_poligono(coorX,coorY,num);//24 por segundo
+      a[cont].crear_poligono(coorX,coorY,num);
       cont++;
  }
  cont=0;
