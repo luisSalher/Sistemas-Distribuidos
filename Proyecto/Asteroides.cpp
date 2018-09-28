@@ -5,7 +5,7 @@
 #include <math.h>
 
 #define NUMERO_ASTEROIDES 15
-#define TAMANO_POLIGONO 11
+#define TAMANO_POLIGONO 5
 
 using namespace std;
 class Poligono{
@@ -17,14 +17,15 @@ class Poligono{
         float yf[60];//arreglo de vertices en Y
         float xf[60];//arreglo de vertices en X
         int nvertices;//total de vertices del poligono
+        int tamano;
         
     public:
         void trayectoria();
         void explosion();
-        void ast(int, int, int);
+        void ast(int, int, int, int);
 };
 
-void Poligono::ast(int xo, int yo, int ld){
+void Poligono::ast(int xo, int yo, int ld, int tm){
     int conta=0;
     float numa=0;
     lado=ld;
@@ -41,7 +42,7 @@ void Poligono::ast(int xo, int yo, int ld){
      gfx_line(xf[conta-1],yf[conta-1],xf[conta],yf[conta]);
      conta++;
      numa=numa+20;
-     gfx_flush();
+     
  }
  gfx_line(xf[0],yf[0],xf[conta-1],yf[conta-1]); //termino de la creación del asteroide
  nvertices=conta-1;
@@ -52,18 +53,16 @@ void Poligono::trayectoria(){
     if (lado==0){
         num1 = rand() % 2;
         num2 = rand() % 3-1;
-        xf[h]= xf[h] + num1;
-        yf[h]= yf[h] + num2;
-        for(h=1; h<=nvertices; h++){
+        for(h=0; h<=nvertices; h++){
             xf[h]= xf[h] + num1;
             yf[h]= yf[h] + num2;
             coordX=coordX+num1;
             coordY=coordY+num2;
-            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
-            gfx_flush();
         }
+        for(h=1;h<=nvertices;h++)
+            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
         gfx_line(xf[0],yf[0],xf[h-1],yf[h-1]);
-        usleep(416);
+        usleep(4166);
     }else if(lado==1){
         num1 = rand() % 3-1;
         num2 = rand() % 2;
@@ -73,13 +72,12 @@ void Poligono::trayectoria(){
             xf[h]= xf[h] + num1;
             yf[h]= yf[h] + num2;
             coordX=coordX+num1;
-            coordY=coordY+num2;
-            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
-            gfx_flush();
+            coordY=coordY+num2;            
         }
+        for(h=1;h<=nvertices;h++)
+            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
         gfx_line(xf[0],yf[0],xf[h-1],yf[h-1]);
-        gfx_flush();
-        usleep(416);
+        usleep(4166);
     }else if(lado==2){
         num1 = rand() % 3-2;
         num2 = rand() % 3-1;
@@ -90,12 +88,11 @@ void Poligono::trayectoria(){
             yf[h]= yf[h] + num2;
             coordX=coordX+num1;
             coordY=coordY+num2;
-            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
-            gfx_flush();
         }
+        for(h=1;h<=nvertices;h++)
+            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
         gfx_line(xf[0],yf[0],xf[h-1],yf[h-1]);
-        gfx_flush();
-        usleep(416);
+        usleep(4166);
     }else if(lado==3){
         num1 = rand() % 3-1;
         num2 = rand() % 3-2;
@@ -106,14 +103,12 @@ void Poligono::trayectoria(){
             yf[h]= yf[h] + num2;
             coordX=coordX+num1;
             coordY=coordY+num2;
-            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
-            gfx_flush();
         }
+        for(h=1;h<=nvertices;h++)
+            gfx_line(xf[h-1],yf[h-1],xf[h],yf[h]);
         gfx_line(xf[0],yf[0],xf[h-1],yf[h-1]);
-        gfx_flush();
-        usleep(416);
+        usleep(4166);
     }
-    
     return;
 }
 
@@ -122,7 +117,7 @@ void Poligono::explosion(){
 }
 
 int main(){
-    int num, coorX, coorY;
+    int num, tam, coorX, coorY;
     Poligono a[NUMERO_ASTEROIDES];
     int cont=0;
     char c;
@@ -147,7 +142,8 @@ int main(){
             coorX=rand()%801;
             coorY=600;
         }
-        a[cont].ast(coorX,coorY,num);
+        tam = 1 + rand() % (6 - 1);
+        a[cont].ast(coorX,coorY,num,tam);
         cont++;
     }
 
@@ -155,7 +151,7 @@ int main(){
         
         for(cont=0;cont<NUMERO_ASTEROIDES;cont++)
         a[cont].trayectoria();
-        
+        gfx_flush();
         gfx_clear();
     }
     return 0;
