@@ -2,10 +2,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
 #include <math.h>
 
 #define NUMERO_ASTEROIDES 15
-#define TAMANO_POLIGONO 11
+#define TAMANO_POLIGONO 5
 
 using namespace std;
 class Poligono{
@@ -17,43 +18,77 @@ class Poligono{
         float yf[60];//arreglo de vertices en Y
         float xf[60];//arreglo de vertices en X
         int nvertices;//total de vertices del poligono
+        int tamano;
+        int maxRadio;
+        vector<int> radios;
+        bool haColisionado;
         
     public:
-        void trayectoria();
+        vector<int> trayectoria();
+        void encontrarColision(Poligono[]);
         void explosion(int,int);
         void ast(int, int, int, int);
         void ast2(int, int);
+        int getMaxRadio();
 };
+
+int Poligono::getMaxRadio(){
+    return maxRadio;
+}
 
 void Poligono::ast(int xo, int yo, int ld, int tm){
     int conta=0;
+    int i = 0;
+    int j = 0;
+    int temp = 0;
     float numa=0;
     lado=ld;
     coordX=xo;
     coordY=yo;
+    int n = 18;
+    radios.reserve(n);
 //creacion del asteroide
     xf[conta]=radio*cos(0.01745329252*numa)+coordX;
     yf[conta]=radio*sin(0.01745329252*numa)+coordY;
     conta++;
  while(numa<=340){    
-     radio = rand() % 20 + 18;
-    xf[conta]=radio*cos(0.01745329252*numa)+coordX;
-    yf[conta]=radio*sin(0.01745329252*numa)+coordY;
+     radio = rand() % 20 + n;
+     radios[i] = radio; //Se agrega el radio al vector que tendrá todos los radios de cada asteroide
+     xf[conta]=radio*cos(0.01745329252*numa)+coordX;
+     yf[conta]=radio*sin(0.01745329252*numa)+coordY;
      gfx_line(xf[conta-1],yf[conta-1],xf[conta],yf[conta]);
      conta++;
      numa=numa+20;
-     
+     i++;
  }
+
+ // Se ordenan los radios almacenados en el vector
+ for (i = 0; i < n; ++i) {
+    for (j = i + 1; j < n; ++j)
+    {
+        if (radios[i] > radios[j]) 
+        {   
+            temp =  radios[i];
+            radios[i] = radios[j];
+            radios[j] = temp;
+        }
+    }
+ }
+
+ // Se asigna el radio mas grande a la variable maxRadio
+ maxRadio = radios[n-1];
+
+
  gfx_line(xf[0],yf[0],xf[conta-1],yf[conta-1]); //termino de la creación del asteroide
  nvertices=conta-1;
 }
-
 
 
 void Poligono::ast2(int xo, int yo){
     int conta=0;
     float numa=0;
     int radio2=10;
+    int var = rand() % 20;
     //lado=ld;
     coordX=xo;
     coordY=yo;
@@ -74,7 +109,12 @@ void Poligono::ast2(int xo, int yo){
  nvertices=conta-1;
 }
 
-void Poligono::trayectoria(){
+
+/*
+ Regresa las coordenadas de un asteroide cada que cambia de posicion
+*/
+vector<int> Poligono::trayectoria(){
+    vector <int> parCoordenadas(3); //Vector que almacena las coordenadas y el radio mayor de un asteroide
     int aux1=0, aux2=0, num1=0,num2=0, h=0;
     if (lado==0){
         num1 = rand() % 2;
@@ -135,16 +175,60 @@ void Poligono::trayectoria(){
         gfx_line(xf[0],yf[0],xf[h-1],yf[h-1]);
         usleep(4166);
     }
-    return;
+
+    parCoordenadas[0] = coordX;
+    parCoordenadas[1] = coordY;
+    parCoordenadas[2] = maxRadio;
+
+    return parCoordenadas;
 }
 
+void Poligono::encontrarColision(Poligono a[]){
+    int i = 0;
+    int j = 0;
+    int cont = 0;
+    double distancia = 0.0;
+    int sumaRadios = 0;
+    vector<int> coordenadasAsteroide(3);
+    vector<vector<int> > vectorCoordenadas(NUMERO_ASTEROIDES); // Vector de vectores de coordenadas
+
+    vectorCoordenadas.reserve(NUMERO_ASTEROIDES);
+
+    for(cont=0; cont<NUMERO_ASTEROIDES; cont++){
+        a[cont].haColisionado = false;
+        coordenadasAsteroide = a[cont].trayectoria();
+        //a[cont].explosion(coordenadasAsteroide[0], coordenadasAsteroide[1]);
+        vectorCoordenadas[cont] = coordenadasAsteroide;
+    }
+
+// Se comparan las coordenadas de los centros
+    for(i=0; i<NUMERO_ASTEROIDES; i++){
+        for(j=0; j<NUMERO_ASTEROIDES; j++){
+            distancia = sqrt(pow((vectorCoordenadas[j][0] - vectorCoordenadas[i][0]), 2) + pow((vectorCoordenadas[j][1] - vectorCoordenadas[i][1]), 2));
+            if(i < j){    
+                sumaRadios = vectorCoordenadas[i][2] + vectorCoordenadas[j][2];
+                if(distancia < 20 && (a[i].haColisionado == false  || a[j].haColisionado == false)){
+                    cout<<"\nColision en los asteroides "<< i << " y " << j<< endl;
+                    cout<< "Coordenadas ( " << vectorCoordenadas[i][0] << ", " << vectorCoordenadas[i][1] << ") " <<endl;
+                    // Llamada al metodo explosion
+                    a[0].explosion((vectorCoordenadas[i][0]), (vectorCoordenadas[i][1]));
+
+                    a[i].haColisionado = true;
+                    a[j].haColisionado = true;
+                    // Falta eliminar los asteroides que colisionan
+                }
+            }
+        }
+    }
+}
 
 void Poligono::explosion(int eX, int eY){
     int i=1;
     int eX1=eX,eX2=eX,eX3=eX,eX4=eX,eX5=eX,eX6=eX;
     int eY1=eY,eY2=eY,eY3=eY,eY4=eY,eY5=eY,eY6=eY;
+    gfx_color(0,200,100);
     for(i=1;i<8;i++){
-        gfx_color(0,200,100);
+        //gfx_color(0,200,100);
         ast2(eX1+=(i*4),eY1);
         ast2(eX2-=(i*4.5),eY2);
         ast2(eX3,eY3-=(i*3));
@@ -152,9 +236,11 @@ void Poligono::explosion(int eX, int eY){
         ast2(eX5-=(i*2.5),eY5-=(i*2.5));
         ast2(eX6+=(i*3.5),eY6+=(i*3.5));
         usleep(100000);
-        gfx_clear();
+        //gfx_clear();
+        //gfx_flush();
+        //gfx_color(255,0,0);
     }
-    
+    return;
 }
 
 int main(){
@@ -187,21 +273,15 @@ int main(){
         a[cont].ast(coorX,coorY,num,tam);
         cont++;
     }
-    int aux=0;
+
     while(1){
-        aux++;
-        for(cont=0;cont<NUMERO_ASTEROIDES;cont++)
-        {
-            aux++;
-            a[cont].trayectoria();
-            if(aux==1000){// Prueba de condicion de explosion
-                a[0].explosion(200,200);
-             }
-        }
+        
+
+        a[cont].encontrarColision(a);
+        //a[cont].encontrarColision(vectorCoordenadas);
+
         gfx_flush();
         gfx_clear();
-       
     }
     return 0;
 }
-
