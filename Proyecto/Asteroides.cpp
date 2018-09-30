@@ -5,7 +5,7 @@
 #include <vector>
 #include <math.h>
 
-#define NUMERO_ASTEROIDES 15
+#define NUMERO_ASTEROIDES 10
 #define TAMANO_POLIGONO 5
 
 using namespace std;
@@ -21,7 +21,7 @@ class Poligono{
         int tamano;
         int maxRadio;
         vector<int> radios;
-        bool haColisionado;
+        bool haColisionado = false;
         
     public:
         vector<int> trayectoria();
@@ -189,29 +189,38 @@ void Poligono::encontrarColision(Poligono a[]){
     int cont = 0;
     double distancia = 0.0;
     int sumaRadios = 0;
+    int coordExplosionX = 0;
+    int coordExplosionY = 0;
     vector<int> coordenadasAsteroide(3);
     vector<vector<int> > vectorCoordenadas(NUMERO_ASTEROIDES); // Vector de vectores de coordenadas
 
     vectorCoordenadas.reserve(NUMERO_ASTEROIDES);
 
     for(cont=0; cont<NUMERO_ASTEROIDES; cont++){
-        a[cont].haColisionado = false;
         coordenadasAsteroide = a[cont].trayectoria();
-        //a[cont].explosion(coordenadasAsteroide[0], coordenadasAsteroide[1]);
         vectorCoordenadas[cont] = coordenadasAsteroide;
+        //cout << "\nCoordenadas asteroide" << coordenadasAsteroide[0] << ", "<< coordenadasAsteroide[1] <<endl;
+        //cout << "Vector coordenadas" << vectorCoordenadas[cont][0] << ", "<< vectorCoordenadas[cont][1] <<endl;
     }
 
 // Se comparan las coordenadas de los centros
     for(i=0; i<NUMERO_ASTEROIDES; i++){
         for(j=0; j<NUMERO_ASTEROIDES; j++){
-            distancia = sqrt(pow((vectorCoordenadas[j][0] - vectorCoordenadas[i][0]), 2) + pow((vectorCoordenadas[j][1] - vectorCoordenadas[i][1]), 2));
-            if(i < j){    
+            if(i < j){  
+                distancia = sqrt(pow((vectorCoordenadas[j][0] - vectorCoordenadas[i][0]), 2) + pow((vectorCoordenadas[j][1] - vectorCoordenadas[i][1]), 2));
                 sumaRadios = vectorCoordenadas[i][2] + vectorCoordenadas[j][2];
-                if(distancia < 20 && (a[i].haColisionado == false  || a[j].haColisionado == false)){
-                    cout<<"\nColision en los asteroides "<< i << " y " << j<< endl;
-                    cout<< "Coordenadas ( " << vectorCoordenadas[i][0] << ", " << vectorCoordenadas[i][1] << ") " <<endl;
+                cout<<"\nDistancia: "<<distancia<<endl;
+                cout<<"Suma radios: "<<sumaRadios<<endl;
+                if((distancia < sumaRadios) && (a[i].haColisionado == false)  && (a[j].haColisionado == false)){
+                    cout<<"\n\tColision en los asteroides "<< i << " y " << j<< endl;
+                    cout<< "Coordenadas 1( " << vectorCoordenadas[i][0] << ", " << vectorCoordenadas[i][1] << ") " <<endl;
+                    cout<< "Coordenadas 2( " << vectorCoordenadas[j][0] << ", " << vectorCoordenadas[j][1] << ") " <<endl;
                     // Llamada al metodo explosion
-                    a[0].explosion((vectorCoordenadas[i][0]), (vectorCoordenadas[i][1]));
+                    coordExplosionX = (vectorCoordenadas[i][0] + vectorCoordenadas[j][0]) / 2;
+                    coordExplosionY = (vectorCoordenadas[i][1] + vectorCoordenadas[j][1]) / 2;
+
+                    cout<< "Coordenadas explosión( " << coordExplosionX << ", " << coordExplosionY << ") " <<endl;
+                    a[0].explosion(coordExplosionX, coordExplosionY);
 
                     a[i].haColisionado = true;
                     a[j].haColisionado = true;
@@ -275,11 +284,7 @@ int main(){
     }
 
     while(1){
-        
-
         a[cont].encontrarColision(a);
-        //a[cont].encontrarColision(vectorCoordenadas);
-
         gfx_flush();
         gfx_clear();
     }
