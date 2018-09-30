@@ -5,7 +5,7 @@
 #include <vector>
 #include <math.h>
 
-#define NUMERO_ASTEROIDES 15
+#define NUMERO_ASTEROIDES 10
 #define PI 3.14159265358979323846
 
 using namespace std;
@@ -230,7 +230,6 @@ void Poligono::encontrarColision(Poligono a[]){
     for(cont=0; cont<NUMERO_ASTEROIDES; cont++){
         a[cont].haColisionado = false;
         coordenadasAsteroide = a[cont].trayectoria();
-        //a[cont].explosion(coordenadasAsteroide[0], coordenadasAsteroide[1]);
         vectorCoordenadas[cont] = coordenadasAsteroide;
     }
 
@@ -240,7 +239,7 @@ void Poligono::encontrarColision(Poligono a[]){
             distancia = sqrt(pow((vectorCoordenadas[j][0] - vectorCoordenadas[i][0]), 2) + pow((vectorCoordenadas[j][1] - vectorCoordenadas[i][1]), 2));
             if(i < j){    
                 sumaRadios = vectorCoordenadas[i][2] + vectorCoordenadas[j][2];
-                if(distancia < 20 && (a[i].haColisionado == false  || a[j].haColisionado == false)){
+                if(distancia < sumaRadios && (a[i].haColisionado == false  || a[j].haColisionado == false)){
                     //cout<<"\nColision en los asteroides "<< i << " y " << j<< endl;
                     //cout<< "Coordenadas ( " << vectorCoordenadas[i][0] << ", " << vectorCoordenadas[i][1] << ") " <<endl;
                     // Llamada al metodo explosion
@@ -319,7 +318,6 @@ int main(){
     while(1){
         
         a[cont].encontrarColision(a);
-        //a[cont].encontrarColision(vectorCoordenadas);
 
         gfx_flush();
         gfx_clear();

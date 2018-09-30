@@ -5,7 +5,7 @@
 #include <vector>
 #include <math.h>
 
-#define NUMERO_ASTEROIDES 10
+#define NUMERO_ASTEROIDES 4
 #define TAMANO_POLIGONO 5
 
 using namespace std;
