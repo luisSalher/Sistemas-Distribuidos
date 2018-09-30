@@ -5,7 +5,7 @@
 #include <vector>
 #include <math.h>
 
-#define NUMERO_ASTEROIDES 10
+#define NUMERO_ASTEROIDES 8
 #define PI 3.14159265358979323846
 
 using namespace std;
