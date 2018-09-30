@@ -209,8 +209,6 @@ void Poligono::encontrarColision(Poligono a[]){
             if(i < j){  
                 distancia = sqrt(pow((vectorCoordenadas[j][0] - vectorCoordenadas[i][0]), 2) + pow((vectorCoordenadas[j][1] - vectorCoordenadas[i][1]), 2));
                 sumaRadios = vectorCoordenadas[i][2] + vectorCoordenadas[j][2];
-                cout<<"\nDistancia: "<<distancia<<endl;
-                cout<<"Suma radios: "<<sumaRadios<<endl;
                 if((distancia < sumaRadios) && (a[i].haColisionado == false)  && (a[j].haColisionado == false)){
                     cout<<"\n\tColision en los asteroides "<< i << " y " << j<< endl;
                     cout<< "Coordenadas 1( " << vectorCoordenadas[i][0] << ", " << vectorCoordenadas[i][1] << ") " <<endl;
