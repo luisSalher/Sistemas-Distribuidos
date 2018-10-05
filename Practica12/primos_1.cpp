@@ -5,12 +5,11 @@
 using namespace std;
 
 int main(){
-	unsigned int n = 4294967291;
+	unsigned int numero = 4294967291; //longest 32 bit integer
+	unsigned int i = 2;
 	
-	unsigned int i = 1;
-	
-	for(i = 2; i<n; i++){
-		if((n%i) == 0){
+	for(i = 2; i<numero; i++){
+		if((numero%i) == 0){
 			cout << "no primo\n";
 			exit(0);
 			break;
