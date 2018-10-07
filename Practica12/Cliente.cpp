@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
     unsigned int *num2 = (unsigned int *)paquete2.obtieneDatos();
     unsigned int *num3 = (unsigned int *)paquete3.obtieneDatos();
     
-    printf("%d\n",num1[0]);
+     printf("%d,%d,%d\n",num1[0],num2[0],num3[0]);
 
     return 0;
 } 
