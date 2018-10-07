@@ -1,8 +1,9 @@
 #include "PaqueteDatagrama.h"
+#include <iostream>
 
 PaqueteDatagrama::PaqueteDatagrama(char *cadena, unsigned int longitudDatagrama, char *direccionIP, int puertoPD){
-	datos = new char[longitudDatagrama];
-	memcpy(datos, cadena, sizeof(char)*longitud);
+    datos = new char[longitudDatagrama];
+	memcpy(datos, cadena, longitudDatagrama);
 	memcpy(ip, direccionIP, sizeof(char)*16);
 	longitud = longitudDatagrama;
 	puerto = puertoPD;
@@ -11,6 +12,8 @@ PaqueteDatagrama::PaqueteDatagrama(char *cadena, unsigned int longitudDatagrama,
 PaqueteDatagrama::PaqueteDatagrama(unsigned int longitudDatagrama){
 	datos = new char[longitudDatagrama];
 	longitud = longitudDatagrama;
+    ip[0]='\0';
+    puerto = 0;
 }
 
 PaqueteDatagrama::~PaqueteDatagrama(){
@@ -44,7 +47,8 @@ void PaqueteDatagrama::inicializaIp(char *direccionIP){
 
 void PaqueteDatagrama::inicializaDatos(char *cadena){
 	memcpy(datos, cadena, sizeof(char)*longitud);
-}
+} 
+
 
 
 
