@@ -14,7 +14,19 @@ int main(int argc, char*argv[]) {
     while(true) {
         printf("%s\n", "ESPERANDO...");
         struct mensaje *msg = respuesta.getRequest();
-        string cadenaInvertida = "Respuesta del servidor";
+
+        string cadenarecibida = msg->arguments;
+        string cadenaInvertida = "";
+        printf("%s\n", cadenaInvertida.c_str());
+
+        // Se invierten las palabras de la cadena
+        for(i = ; i<strlen(cadenarecibida); i++){
+            if(cadenarecibida[i] != ' '){
+                cadenaInvertida[i] = cadenarecibida[i];
+            }
+        }
+
+
 
         respuesta.sendReply((char *)cadenaInvertida.c_str(), msg->IP, msg->puerto);
     }

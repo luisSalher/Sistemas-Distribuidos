@@ -2,9 +2,10 @@
 
 PaqueteDatagrama::PaqueteDatagrama(char *cadena, unsigned int longitudDatagrama, char *direccionIP, int puertoPD){
 	datos = new char[longitudDatagrama];
+	longitud = longitudDatagrama;
 	memcpy(datos, cadena, sizeof(char)*longitud);
 	memcpy(ip, direccionIP, sizeof(char)*16);
-	longitud = longitudDatagrama;
+	
 	puerto = puertoPD;
 }
 
