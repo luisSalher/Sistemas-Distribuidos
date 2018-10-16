@@ -36,6 +36,7 @@ rand_prog_1(char *host, int itera)
         }
         printf("%d: %f\n", i, *result_2);
     }
+
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
@@ -48,9 +49,10 @@ main (int argc, char *argv[])
 	char *host;
 
 	if (argc < 3) {
-		printf ("uso: %s server_host num\n", argv[0]);
+		printf ("uso: %s server_host numero\n", argv[0]);
 		exit (1);
 	}
+	
 	host = argv[1];
 	rand_prog_1 (host, atoi(argv[2]));
 

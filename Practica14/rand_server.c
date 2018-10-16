@@ -4,6 +4,8 @@
  * as a guideline for developing your own functions.
  */
 
+// Run server as root!
+
 #include "rand.h"
 
 void *
@@ -11,11 +13,7 @@ inicializa_random_1_svc(long *argp, struct svc_req *rqstp)
 {
 	static char * result;
 
-	/*
-	 * insert server code here
-	 */
-
-	printf("%s\n", "inicializa_random_1_svc");
+	printf("\nServidor\n");
     srandom(*argp);
 
 	return (void *) &result;
@@ -26,10 +24,6 @@ obtiene_siguiente_random_1_svc(void *argp, struct svc_req *rqstp)
 {
 	static double  result;
 
-	/*
-	 * insert server code here
-	 */
-	printf("%s\n", "obtiene_siguiente_random_1_svc");
 	result = random();
 	return &result;
 }
