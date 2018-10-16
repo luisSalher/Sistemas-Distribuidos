@@ -6,37 +6,38 @@
 #ifndef _RAND_H_RPCGEN
 #define _RAND_H_RPCGEN
 
-#define RPCGEN_VERSION	199506
-
 #include <rpc/rpc.h>
 
 
-#define RAND_PROG ((rpc_uint)0x31111111)
-#define RAND_VERS ((rpc_uint)1)
-
 #ifdef __cplusplus
-#define INICIALIZA_RANDOM ((rpc_uint)1)
-extern "C" void * inicializa_random_1(long *, CLIENT *);
-extern "C" void * inicializa_random_1_svc(long *, struct svc_req *);
-#define OBTIENE_SIGUIENTE_RANDOM ((rpc_uint)2)
-extern "C" double * obtiene_siguiente_random_1(void *, CLIENT *);
-extern "C" double * obtiene_siguiente_random_1_svc(void *, struct svc_req *);
+extern "C" {
+#endif
 
-#elif __STDC__
-#define INICIALIZA_RANDOM ((rpc_uint)1)
+
+#define RAND_PROG 0x31111111
+#define RAND_VERS 1
+
+#if defined(__STDC__) || defined(__cplusplus)
+#define INICIALIZA_RANDOM 1
 extern  void * inicializa_random_1(long *, CLIENT *);
 extern  void * inicializa_random_1_svc(long *, struct svc_req *);
-#define OBTIENE_SIGUIENTE_RANDOM ((rpc_uint)2)
+#define OBTIENE_SIGUIENTE_RANDOM 2
 extern  double * obtiene_siguiente_random_1(void *, CLIENT *);
 extern  double * obtiene_siguiente_random_1_svc(void *, struct svc_req *);
+extern int rand_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
-#else /* Old Style C */
-#define INICIALIZA_RANDOM ((rpc_uint)1)
+#else /* K&R C */
+#define INICIALIZA_RANDOM 1
 extern  void * inicializa_random_1();
 extern  void * inicializa_random_1_svc();
-#define OBTIENE_SIGUIENTE_RANDOM ((rpc_uint)2)
+#define OBTIENE_SIGUIENTE_RANDOM 2
 extern  double * obtiene_siguiente_random_1();
 extern  double * obtiene_siguiente_random_1_svc();
-#endif /* Old Style C */
+extern int rand_prog_1_freeresult ();
+#endif /* K&R C */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* !_RAND_H_RPCGEN */

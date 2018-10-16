@@ -9,25 +9,23 @@
 void *
 inicializa_random_1_svc(long *argp, struct svc_req *rqstp)
 {
-
-	static char* result;
+	static char * result;
 
 	/*
 	 * insert server code here
 	 */
 
-	return((void*) &result);
+	return (void *) &result;
 }
 
 double *
 obtiene_siguiente_random_1_svc(void *argp, struct svc_req *rqstp)
 {
-
 	static double  result;
 
 	/*
 	 * insert server code here
 	 */
 
-	return(&result);
+	return &result;
 }
