@@ -15,6 +15,9 @@ inicializa_random_1_svc(long *argp, struct svc_req *rqstp)
 	 * insert server code here
 	 */
 
+	printf("%s\n", "inicializa_random_1_svc");
+    srandom(*argp);
+
 	return (void *) &result;
 }
 
@@ -26,6 +29,7 @@ obtiene_siguiente_random_1_svc(void *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
-
+	printf("%s\n", "obtiene_siguiente_random_1_svc");
+	result = random();
 	return &result;
 }

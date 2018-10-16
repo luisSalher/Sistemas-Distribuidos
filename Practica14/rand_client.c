@@ -8,11 +8,11 @@
 
 
 void
-rand_prog_1(char *host)
+rand_prog_1(char *host, int itera)
 {
 	CLIENT *clnt;
 	void  *result_1;
-	long  inicializa_random_1_arg;
+	long  inicializa_random_1_arg = 0;
 	double  *result_2;
 	char *obtiene_siguiente_random_1_arg;
 
@@ -28,10 +28,14 @@ rand_prog_1(char *host)
 	if (result_1 == (void *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	result_2 = obtiene_siguiente_random_1((void*)&obtiene_siguiente_random_1_arg, clnt);
-	if (result_2 == (double *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
+
+    for(int i = 0; i < itera; i++){
+        result_2 = obtiene_siguiente_random_1((void*)&obtiene_siguiente_random_1_arg, clnt);
+        if (result_2 == (double *) NULL) {
+            clnt_perror (clnt, "call failed");
+        }
+        printf("%d: %f\n", i, *result_2);
+    }
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */
@@ -43,11 +47,12 @@ main (int argc, char *argv[])
 {
 	char *host;
 
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
+	if (argc < 3) {
+		printf ("uso: %s server_host num\n", argv[0]);
 		exit (1);
 	}
 	host = argv[1];
-	rand_prog_1 (host);
+	rand_prog_1 (host, atoi(argv[2]));
+
 exit (0);
 }
