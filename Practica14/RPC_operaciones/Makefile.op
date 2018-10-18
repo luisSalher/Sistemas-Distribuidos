@@ -3,18 +3,18 @@
 
 # Parameters
 
-CLIENT = operaciones_client
-SERVER = operaciones_server
+CLIENT = op_client
+SERVER = op_server
 
 SOURCES_CLNT.c = 
 SOURCES_CLNT.h = 
 SOURCES_SVC.c = 
 SOURCES_SVC.h = 
-SOURCES.x = operaciones.x
+SOURCES.x = op.x
 
-TARGETS_SVC.c = operaciones_svc.c operaciones_server.c operaciones_xdr.c 
-TARGETS_CLNT.c = operaciones_clnt.c operaciones_client.c operaciones_xdr.c 
-TARGETS = operaciones.h operaciones_xdr.c operaciones_clnt.c operaciones_svc.c operaciones_client.c operaciones_server.c
+TARGETS_SVC.c = op_svc.c op_server.c op_xdr.c 
+TARGETS_CLNT.c = op_clnt.c op_client.c op_xdr.c 
+TARGETS = op.h op_xdr.c op_clnt.c op_svc.c op_client.c op_server.c
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
 OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)

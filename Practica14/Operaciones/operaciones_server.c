@@ -14,6 +14,8 @@ suma_1_svc(struct Terminos *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	puts("SUMA");
+	result.res = argp->i + argp->j;
 
 	return &result;
 }
@@ -26,6 +28,8 @@ producto_1_svc(struct Terminos *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
+	puts("PRODUCTO");
+	result.res = argp->i * argp->j;
 
 	return &result;
 }
@@ -38,6 +42,7 @@ cociente_1_svc(struct Terminos *argp, struct svc_req *rqstp)
 	/*
 	 * insert server code here
 	 */
-
+	puts("COCIENTE");
+	result.res = argp->i /(double) argp->j;
 	return &result;
 }
