@@ -8,10 +8,10 @@ int main(int argc, char const *argv[]) {
 
     SocketDatagrama socketCliente(6666);
     printf("%s\n", "ENVIANDO PAQUETE...");
-    float a[1];
+    float a[2];
     a[0] = 877;
 
-    PaqueteDatagrama paquete((char *)a, 4, (char *) "127.0.0.1", PUERTO);
+    PaqueteDatagrama paquete((char *)a, 8, (char *) "127.0.0.1", PUERTO);
     printf("Mandando paquete a: %s:%d\n", paquete.obtieneDireccion(), paquete.obtienePuerto());
     
     socketCliente.envia(paquete);

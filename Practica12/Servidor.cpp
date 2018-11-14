@@ -1,6 +1,6 @@
 #include "SocketDatagrama.h"
 #include <iostream>
-#define PUERTO 7200
+#define PUERTO 7201
 
 int main(int argc, char const *argv[]) {
     printf("%s\n", "SERVIDOR");
